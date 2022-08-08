@@ -10,3 +10,5 @@ first change
 файлы override.tf и override.tf.json
 все файлы, заканчивающиеся на _override.tf или на _override.tf.json
 файлы .terraformrc и terraform.rc
+
+Line to test PyCharm
