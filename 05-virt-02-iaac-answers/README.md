@@ -146,14 +146,23 @@ server1.netology           : ok=7    changed=3    unreachable=0    failed=0    s
   <summary>После подключения к ВМ с помощью vagrant ssh</summary>
   <p>
 vagrant@server1:~$ docker ps
+
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
 vagrant@server1:~$ docker version
+
 Client: Docker Engine - Community
+
  Version:           20.10.22
+
  API version:       1.41
+
  Go version:        go1.18.9
+
  Git commit:        3a2c30b
+
  Built:             Thu Dec 15 22:28:08 2022
+
  OS/Arch:           linux/amd64
  Context:           default
  Experimental:      true
