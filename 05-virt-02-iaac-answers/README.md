@@ -33,8 +33,9 @@
 
 *Приложить вывод команд установленных версий каждой из программ, оформленный в markdown.*
 
+#### Vagrant
 ```
-PS C:\Users\yaitk\Documents\courses\netologia\vagrant2> vagrant version
+PS C:\...\netologia\vagrant2> vagrant version
 Installed Version: 2.3.0
 Latest Version: 2.3.4
 
@@ -49,9 +50,10 @@ CHANGELOG below:
 
   https://github.com/hashicorp/vagrant/blob/v2.3.4/CHANGELOG.md
 ```
-
+#### VirtualBox
 ![Alt text](images/virtual_box_ver.png?raw=true "Title")
 
+#### Ansible
 Ansible был установлен внутри созданной с помощью Vagrant ВМ (из задачи 4)
 
 ```
