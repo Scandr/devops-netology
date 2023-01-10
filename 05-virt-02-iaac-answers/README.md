@@ -141,7 +141,7 @@ server1.netology           : ok=7    changed=3    unreachable=0    failed=0    s
   </p>
 </details>
 
-```
+``` 
 <details>
   <summary>После подключения к ВМ с помощью vagrant ssh</summary>
     <p>
