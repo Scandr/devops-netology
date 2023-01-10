@@ -141,11 +141,11 @@ server1.netology           : ok=7    changed=3    unreachable=0    failed=0    s
   </p>
 </details>
 
-
+```
 <details>
   <summary>После подключения к ВМ с помощью vagrant ssh</summary>
     <p>
-#```
+
 vagrant@server1:~$ docker ps <br />
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES <br /> 
 vagrant@server1:~$ docker version  <br />
@@ -177,6 +177,6 @@ Server: Docker Engine - Community<br />
  docker-init:<br />
   Version:          0.19.0<br />
   GitCommit:        de40ad0<br />
-#```  
+```  
     </p>
 </details>
