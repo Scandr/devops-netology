@@ -64,8 +64,8 @@ docker ps
 
 <details>
   <summary>Вывод консоли при выполенении команды vagrant up - создании ВМ </summary>
-  <p>
 
+```
 PS C:\Users\yaitk\Documents\courses\netologia\git_repo_v2\devops-netology\05-virt-02-iaac-answers\src\vagrant> vagrant up
 Bringing machine 'server1.netology' up with 'virtualbox' provider...
 ==> server1.netology: Importing base box 'bento/ubuntu-20.04'...
@@ -138,7 +138,7 @@ changed: [server1.netology]
 PLAY RECAP *********************************************************************
 server1.netology           : ok=7    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=1
 
-  </p>
+```
 </details>
 
 
