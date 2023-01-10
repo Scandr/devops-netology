@@ -52,6 +52,22 @@ CHANGELOG below:
 
 ![Alt text](images/virtual_box_ver.png?raw=true "Title")
 
+Ansible был установлен внутри созданной с помощью Vagrant ВМ (из задачи 4)
+
+```
+vagrant@server1:~$ ansible --version
+ansible [core 2.12.10]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/vagrant/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/vagrant/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible
+  python version = 3.8.10 (default, Mar 15 2022, 12:22:08) [GCC 9.4.0]
+  jinja version = 2.10.1
+  libyaml = True
+ 
+ ```
+
 ## Задача 4 (*)
 
 Воспроизвести практическую часть лекции самостоятельно.
@@ -66,7 +82,7 @@ docker ps
   <summary>Вывод консоли при выполенении команды vagrant up - создании ВМ </summary>
 
 ```
-PS C:\Users\yaitk\Documents\courses\netologia\git_repo_v2\devops-netology\05-virt-02-iaac-answers\src\vagrant> vagrant up
+PS C:\...\05-virt-02-iaac-answers\src\vagrant> vagrant up
 Bringing machine 'server1.netology' up with 'virtualbox' provider...
 ==> server1.netology: Importing base box 'bento/ubuntu-20.04'...
 ==> server1.netology: Matching MAC address for NAT networking...
