@@ -146,37 +146,37 @@ server1.netology           : ok=7    changed=3    unreachable=0    failed=0    s
     <summary>После подключения к ВМ с помощью vagrant ssh</summary>
 
 ``` 
-vagrant@server1:~$ docker ps <br />
-CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES <br /> 
-vagrant@server1:~$ docker version  <br />
-Client: Docker Engine - Community  <br />
- Version:           20.10.22  <br />
- API version:       1.41  <br />
- Go version:        go1.18.9<br />
- Git commit:        3a2c30b<br />
- Built:             Thu Dec 15 22:28:08 2022<br />
- OS/Arch:           linux/amd64<br />
- Context:           default<br />
- Experimental:      true<br />
+vagrant@server1:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES 
+vagrant@server1:~$ docker version 
+Client: Docker Engine - Community 
+ Version:           20.10.22 
+ API version:       1.41 
+ Go version:        go1.18.9
+ Git commit:        3a2c30b
+ Built:             Thu Dec 15 22:28:08 2022
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
 
-Server: Docker Engine - Community<br />
- Engine:<br />
-  Version:          20.10.22<br />
-  API version:      1.41 (minimum version 1.12)<br />
-  Go version:       go1.18.9<br />
-  Git commit:       42c8b31<br />
-  Built:            Thu Dec 15 22:25:58 2022<br />
-  OS/Arch:          linux/amd64<br />
-  Experimental:     false<br />
- containerd:<br />
-  Version:          1.6.15<br />
-  GitCommit:        5b842e528e99d4d4c1686467debf2bd4b88ecd86<br />
- runc:<br />
-  Version:          1.1.4<br />
-  GitCommit:        v1.1.4-0-g5fd4c4d<br />
- docker-init:<br />
-  Version:          0.19.0<br />
-  GitCommit:        de40ad0<br />
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.22
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.18.9
+  Git commit:       42c8b31
+  Built:            Thu Dec 15 22:25:58 2022
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.15
+  GitCommit:        5b842e528e99d4d4c1686467debf2bd4b88ecd86
+ runc:
+  Version:          1.1.4
+  GitCommit:        v1.1.4-0-g5fd4c4d
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
 ```
 
 </details>
