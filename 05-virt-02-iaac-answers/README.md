@@ -145,7 +145,7 @@ server1.netology           : ok=7    changed=3    unreachable=0    failed=0    s
 <details>
   <summary>После подключения к ВМ с помощью vagrant ssh</summary>
   <p>
-vagrant@server1:~$ docker ps  
+vagrant@server1:~$ docker ps <br />
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES  
 vagrant@server1:~$ docker version  
 Client: Docker Engine - Community  
