@@ -60,19 +60,19 @@ https://hub.docker.com/r/xillah/netology-05-virt-03-docker/tags
 
 - Высоконагруженное монолитное java веб-приложение; </br>
 Виртуальная машина
-- Nodejs веб-приложение;
+- Nodejs веб-приложение; </br>
 docker
-- Мобильное приложение c версиями для Android и iOS;
+- Мобильное приложение c версиями для Android и iOS; </br>
 docker
-- Шина данных на базе Apache Kafka;
-физическая машина (https://habr.com/ru/company/oleg-bunin/blog/663306/)
-- Elasticsearch кластер для реализации логирования продуктивного веб-приложения - три ноды elasticsearch, два logstash и две ноды kibana;
+- Шина данных на базе Apache Kafka; </br>
+физическая машина (https://habr.com/ru/company/oleg-bunin/blog/663306/) </br>
+- Elasticsearch кластер для реализации логирования продуктивного веб-приложения - три ноды elasticsearch, два logstash и две ноды kibana; </br>
 docker
-- Мониторинг-стек на базе Prometheus и Grafana;
+- Мониторинг-стек на базе Prometheus и Grafana; </br>
 docker
-- MongoDB, как основное хранилище данных для java-приложения;
+- MongoDB, как основное хранилище данных для java-приложения; </br>
 физическая машина
-- Gitlab сервер для реализации CI/CD процессов и приватный (закрытый) Docker Registry.
+- Gitlab сервер для реализации CI/CD процессов и приватный (закрытый) Docker Registry. </br>
 Виртуальная машина или физическая машина
 
 ## Задача 3
