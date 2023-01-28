@@ -83,6 +83,40 @@ docker
 - Добавьте еще один файл в папку ```/data``` на хостовой машине;
 - Подключитесь во второй контейнер и отобразите листинг и содержание файлов в ```/data``` контейнера.
 
+Контейнер с Centos
+```
+vagrant@server1:~$ docker run -d --name centos -v  /home/vagrant/data:/data centos:latest
+```
+Контейнер с Debian
+```
+vagrant@server1:~$ docker run -d --name debian -v  /home/vagrant/data:/data debian:latest
+```
+Демонстрация файлов:
+```
+vagrant@server1:~$ docker exec -it centos /bin/bash
+[root@ace868476c61 /]# cd data
+[root@ace868476c61 data]# ls
+[root@ace868476c61 data]# echo test > test.txt
+[root@ace868476c61 data]# ls
+test.txt
+[root@ace868476c61 data]# exit
+exit
+vagrant@server1:~$ ls
+data  indexdz.html  nginxdz
+vagrant@server1:~$ echo test2 > ./data/test2
+vagrant@server1:~$ docker exec -it debian /bin/bash
+root@8c196a2c508d:/# ls -la /data
+total 16
+drwxrwxr-x 2 1000 1000 4096 Jan 28 15:16 .
+drwxr-xr-x 1 root root 4096 Jan 28 14:58 ..
+-rw-r--r-- 1 root root    5 Jan 28 15:16 test.txt
+-rw-rw-r-- 1 1000 1000    6 Jan 28 15:16 test2
+root@8c196a2c508d:/# cat /data/*
+test
+test2
+```
+
+
 ## Задача 4 (*)
 
 Воспроизвести практическую часть лекции самостоятельно.
