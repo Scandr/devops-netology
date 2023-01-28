@@ -61,7 +61,8 @@ https://hub.docker.com/r/xillah/netology-05-virt-03-docker/tags
 - Высоконагруженное монолитное java веб-приложение; </br>
 Виртуальная машина
 - Nodejs веб-приложение; </br>
-docker
+#### Ответ: docker
+
 - Мобильное приложение c версиями для Android и iOS; </br>
 docker
 - Шина данных на базе Apache Kafka; </br>
