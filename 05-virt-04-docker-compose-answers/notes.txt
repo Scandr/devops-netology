@@ -4,7 +4,7 @@ PS C:\Users\yaitk> yc init
 Welcome! This command will take you through the configuration process.
 Please go to https://oauth.yandex.ru/authorize?response_type=token&client_id=1a6990aa636648e9b2ef855fa7bec2fb in order to obtain OAuth token.
 
-Please enter OAuth token: y0_AgAAAAAJUPYNAATuwQAAAADbmMKgxDZjVBovSp2Tf7A5eL8hilINID4
+Please enter OAuth token:
 You have one cloud available: 'cloud-yaitskaya-helen' (id = b1g2fffomokflpsrefif). It is going to be used by default.
 You have no available folders. You will be guided through creating one.
 Please enter a folder name: netologia
