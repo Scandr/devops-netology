@@ -1,0 +1,41 @@
+yc init output:
+
+PS C:\Users\yaitk> yc init
+Welcome! This command will take you through the configuration process.
+Please go to https://oauth.yandex.ru/authorize?response_type=token&client_id=1a6990aa636648e9b2ef855fa7bec2fb in order to obtain OAuth token.
+
+Please enter OAuth token: y0_AgAAAAAJUPYNAATuwQAAAADbmMKgxDZjVBovSp2Tf7A5eL8hilINID4
+You have one cloud available: 'cloud-yaitskaya-helen' (id = b1g2fffomokflpsrefif). It is going to be used by default.
+You have no available folders. You will be guided through creating one.
+Please enter a folder name: netologia
+Your current folder has been set to 'netologia' (id = b1gse6fjmhipl4je57pj).
+Do you want to configure a default Compute zone? [Y/n] y
+Which zone do you want to use as a profile default?
+ [1] ru-central1-a
+ [2] ru-central1-b
+ [3] ru-central1-c
+ [4] Don't set default zone
+Please enter your numeric choice: 2
+Your profile default Compute zone has been set to 'ru-central1-b'.
+
+PS C:\Users\yaitk> yc vpc network create --name mynet --labels my-label=netology --description "Network for 05-virt-04-docker-compose homework"
+id: enpun0qntr5jg24u1kmc
+folder_id: b1gse6fjmhipl4je57pj
+created_at: "2023-02-21T19:48:24Z"
+name: mynet
+description: Network for 05-virt-04-docker-compose homework
+labels:
+  my-label: netology
+
+PS C:\Users\yaitk> yc vpc subnet create --name mysubnet-b --zone ru-central1-b --range 172.16.6.0/24 --network-name mynet --description "Subnetwork for 05-virt-04-docker-compose homework"
+id: e2lcolh66lvtgk3ba9p9
+folder_id: b1gse6fjmhipl4je57pj
+created_at: "2023-02-21T20:04:03Z"
+name: mysubnet-b
+description: Subnetwork for 05-virt-04-docker-compose homework
+network_id: enpun0qntr5jg24u1kmc
+zone_id: ru-central1-b
+v4_cidr_blocks:
+  - 172.16.6.0/24
+
+
