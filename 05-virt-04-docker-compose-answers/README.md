@@ -52,7 +52,7 @@
 
 
 ### Ответ
-![Alt text](task3.png?raw=true "Title")
+![Alt text](task3.PNG?raw=true "Title")
 
 
 ## Задача 4 (*)
