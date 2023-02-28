@@ -1,0 +1,26 @@
+{
+  "builders": [
+    {
+      "iso_checksum": "07b94e6b1a0b0260b94c83d6bb76b26bf7a310dc78d7a9c7432809fb9bc6194a",
+      "iso_url": "http://mirrors.powernet.com.ru/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Minimal-2009.iso",
+      "disk_type": "network-nvme",
+      "folder_id": "enpun0qntr5jg24u1kmc",
+      "image_description": "image created by packer",
+      "ssh_username": "centos",
+      "subnet_id": "b1gse6fjmhipl4je57pj",
+      "token": "",
+      "type": "yandex",
+      "use_ipv4_nat": true,
+      "zone": "ru-central1-b"
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "sudo yum -y update",
+        "sudo yum -y install bridge-utils bind-utils iptables curl net-tools tcpdump rsync telnet openssh-server"
+      ],
+      "type": "shell"
+    }
+  ]
+}

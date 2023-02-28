@@ -1,0 +1,29 @@
+{
+  "builders": [
+    {
+      "type":      "yandex",
+      "token":     "y0_AgAAAAAJUPYNAATuwQAAAADbmMKgxDZjVBovSp2Tf7A5eL8hilINID4",
+      "folder_id": "b1gse6fjmhipl4je57pj",
+      "zone":      "ru-central1-b",
+
+      "image_name":        "mycentos-stream-8",
+      "image_family":      "centos-stream-8",
+      "image_description": "my custom centos",
+
+      "source_image_family": "centos-stream-8",
+      "subnet_id":           "e2lcolh66lvtgk3ba9p9",
+      "use_ipv4_nat":        true,
+      "ssh_username":        "centos",
+      "temporary_key_pair_type":  "ed25519"
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "sudo yum -y update",
+        "sudo yum -y install bridge-utils bind-utils iptables curl net-tools tcpdump rsync telnet openssh-server"
+      ],
+      "type": "shell"
+    }
+  ]
+}

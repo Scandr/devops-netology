@@ -28,6 +28,9 @@
 
 Для получения зачета вам необходимо предоставить скриншот страницы с созданным образом из личного кабинета YandexCloud.
 
+### Ответ
+![Alt text](task1.png?raw=true "Title")
+
 ## Задача 2
 
 Создать вашу первую виртуальную машину в YandexCloud.
@@ -46,6 +49,11 @@
 <p align="center">
   <img width="1200" height="600" src="./assets/yc_02.png">
 </p>
+
+
+### Ответ
+![Alt text](task3.png?raw=true "Title")
+
 
 ## Задача 4 (*)
 
