@@ -45,11 +45,17 @@ docker node ls
 ```
 
 ### Ответ
+yc config
+```
+yc init
 
+```
 Create service account key:
 ```
 yc iam key create --service-account-id aje4gtn3qdenqf9qn6vr --folder-name b1gse6fjmhipl4je57pj --output key.json
 ```
+
+![Alt text](task2.PNG?raw=true "Title")
 
 ## Задача 3
 
@@ -59,7 +65,8 @@ yc iam key create --service-account-id aje4gtn3qdenqf9qn6vr --folder-name b1gse6
 ```
 docker service ls
 ```
-
+### Ответ
+![Alt text](task3.PNG?raw=true "Title")
 ## Задача 4 (*)
 
 Выполнить на лидере Docker Swarm кластера команду (указанную ниже) и дать письменное описание её функционала, что она делает и зачем она нужна:
