@@ -39,6 +39,7 @@ go version go1.20.2 linux/amd64
     }
     ```
 ### Ответ: 
+[https://github.com/Scandr/devops-netology/blob/main/07-terraform-05-golang/meter2feet.go](meter2feet.go)
 ```
 $ go run meter2feet.go
 Enter value in meter units: 5
@@ -51,6 +52,7 @@ Enter value in meter units: 5
     x := []int{48,96,86,68,57,82,63,70,37,34,83,27,19,97,9,17,}
     ```
 ### Ответ: 
+[https://github.com/Scandr/devops-netology/blob/main/07-terraform-05-golang/min_in_list.go](min_in_list.go)
 ```   
 $ go run min_in_list.go
 x[i] = 96       x[i] = 86       x[i] = 68       x[i] = 57       x[i] = 82       x[i] = 63       x[i] = 70       x[i] = 37       x[i] = 34       x[i] = 83       x[i] = 27       x[i] = 19       x[i] = 97       x[i] = 9        x[i] = 17
