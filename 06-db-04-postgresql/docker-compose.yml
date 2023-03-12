@@ -1,0 +1,15 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 1234
+      PGDATA: /opt/postgresql/data
+    volumes:
+    # can't access folders in /mnt/c when using ubuntu app for windows -> mount dir fron ubuntu space
+      - /opt/volume/pgdata:/opt/postgresql/data
+      - /opt/volume/files:/files
