@@ -4,6 +4,7 @@
 
 Используя docker поднимите инстанс PostgreSQL (версию 13). Данные БД сохраните в volume.
 #### Ответ 
+[docker-compose.yml](https://github.com/Scandr/devops-netology/blob/main/06-db-04-postgresql/docker-compose.yml)
 ```
 $ sudo podman-compose up -d
 ['podman', '--version', '']
@@ -113,6 +114,9 @@ test_database=# SELECT MAX(avg_width) FROM pg_stats WHERE tablename = 'orders';
 провести разбиение таблицы на 2 (шардировать на orders_1 - price>499 и orders_2 - price<=499).
 
 Предложите SQL-транзакцию для проведения данной операции.
+
+#### Ответ
+[table_sharding.sql](https://github.com/Scandr/devops-netology/blob/main/06-db-04-postgresql/table_sharding.sql)
 ```
 postgres@3dd643a49c64:/$  psql -d test_database -f /files/table_sharding.sql
 CREATE TABLE
@@ -146,15 +150,20 @@ test_database=# SELECT * FROM orders_2;
 
 Можно ли было изначально исключить "ручное" разбиение при проектировании таблицы orders?
 
-Можно, создав партиции для данной таблицы и триггер на распрееделение значений при вставке в исходную таблицу
+#### Ответ
+Можно, сделав триггер на распрееделение значений при вставке в исходную таблицу [add_partitions.sql](https://github.com/Scandr/devops-netology/blob/main/06-db-04-postgresql/add_partitions.sql) или создав партиции для данной таблицы [add_partitions_v2.sql](https://github.com/Scandr/devops-netology/blob/main/06-db-04-postgresql/add_partitions_v2.sql)
 
 ## Задача 4
 
 Используя утилиту `pg_dump` создайте бекап БД `test_database`.
+#### Ответ
+[test_database-bak.sql](https://github.com/Scandr/devops-netology/blob/main/06-db-04-postgresql/test_database-bak.sql)
+
 
 Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца `title` для таблиц `test_database`?
+#### Ответ
+Добавить ограничение UNIQUE [test-database-bak-unique.sql](https://github.com/Scandr/devops-netology/blob/main/06-db-04-postgresql/test-database-bak-unique.sql)
 
-Добавить ограничение UNIQUE [pg_stats](https://postgrespro.ru/docs/postgresql/12/view-pg-stats)
 
 
 ---
