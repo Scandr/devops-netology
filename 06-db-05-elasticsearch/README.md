@@ -117,9 +117,38 @@ $ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://lo
 }
 ```
 Как вы думаете, почему часть индексов и кластер находится в состоянии yellow?
-
+Часть индексов не распределены по нодам, так как нода только одна:
+```
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://localhost:9200/_cat/shards?v=true&h=index,shard,prirep,state,node,unassigned.reason&s=state&pretty"
+index            shard prirep state      node          unassigned.reason
+ind-3            0     r      UNASSIGNED               INDEX_CREATED
+ind-3            0     r      UNASSIGNED               INDEX_CREATED
+ind-3            1     r      UNASSIGNED               INDEX_CREATED
+ind-3            1     r      UNASSIGNED               INDEX_CREATED
+ind-3            2     r      UNASSIGNED               INDEX_CREATED
+ind-3            2     r      UNASSIGNED               INDEX_CREATED
+ind-3            3     r      UNASSIGNED               INDEX_CREATED
+ind-3            3     r      UNASSIGNED               INDEX_CREATED
+ind-2            0     r      UNASSIGNED               INDEX_CREATED
+ind-2            1     r      UNASSIGNED               INDEX_CREATED
+ind-1            0     p      STARTED    netology_test
+ind-3            0     p      STARTED    netology_test
+ind-3            1     p      STARTED    netology_test
+ind-3            2     p      STARTED    netology_test
+ind-3            3     p      STARTED    netology_test
+.geoip_databases 0     p      STARTED    netology_test
+.security-7      0     p      STARTED    netology_test
+ind-2            0     p      STARTED    netology_test
+ind-2            1     p      STARTED    netology_test
+```
 Удалите все индексы.
-
+```
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X DELETE "https://localhost:9200/ind-1?pretty"
+{
+  "acknowledged" : true
+}
+...
+```
 **Важно**
 
 При проектировании кластера elasticsearch нужно корректно рассчитывать количество реплик и шард,
