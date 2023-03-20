@@ -72,6 +72,7 @@ Enter host password for user 'elastic':
 | ind-3 | 2 | 4 |
 
 Получите список индексов и их статусов, используя API и **приведите в ответе** на задание.
+#### Ответ: 
 ```
 $ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X PUT "https://localhost:9200/ind-1?pretty" -H 'Content-Type: application/json' -d'
 {
@@ -117,6 +118,7 @@ $ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://lo
 }
 ```
 Как вы думаете, почему часть индексов и кластер находится в состоянии yellow?
+#### Ответ: 
 Часть индексов не распределены по нодам, так как нода только одна:
 ```
 $ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://localhost:9200/_cat/shards?v=true&h=index,shard,prirep,state,node,unassigned.reason&s=state&pretty"
@@ -166,21 +168,113 @@ $ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X DELETE "https:/
 данную директорию как `snapshot repository` c именем `netology_backup`.
 
 **Приведите в ответе** запрос API и результат вызова API для создания репозитория.
-
+#### Ответ: 
+```
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X PUT "https://localhost:9200/_snapshot/netology_backup?pretty" -H 'Content-Type: application/json' -d'
+ "type"> {
+>   "type": "fs",
+>   "settings": {
+>     "location": "snapshots"
+>   }
+> }
+> '
+{
+  "acknowledged" : true
+}
+```
 Создайте индекс `test` с 0 реплик и 1 шардом и **приведите в ответе** список индексов.
-
+#### Ответ: 
+```
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://localhost:9200/_cat/indices/*?v=true&s=index&pretty"
+health status index uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   test  tmgxCwkzQ_qCLsgvawSY4A   1   0          0            0       225b           225b
+```
 [Создайте `snapshot`](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html) 
 состояния кластера `elasticsearch`.
-
+```
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X PUT "https://localhost:9200/_snapshot/netology_backup/%3Cmy_snapshot_%7Bnow%2Fd%7D%3E?pretty"
+{
+  "accepted" : true
+}
+```
 **Приведите в ответе** список файлов в директории со `snapshot`ами.
-
+#### Ответ: 
+```
+[elastic@3214934788da elasticsearch-8.6.2]$ ls -la snapshots/snapshots/
+total 44
+drwxr-xr-x 3 elastic elastic  4096 Mar 20 21:33 .
+drwxrwxr-x 3 elastic elastic  4096 Mar 20 21:24 ..
+-rw-r--r-- 1 elastic elastic  1107 Mar 20 21:33 index-0
+-rw-r--r-- 1 elastic elastic     8 Mar 20 21:33 index.latest
+drwxr-xr-x 5 elastic elastic  4096 Mar 20 21:33 indices
+-rw-r--r-- 1 elastic elastic 18700 Mar 20 21:33 meta-nO1FtOkHT0eA7rz6f1RZxA.dat
+-rw-r--r-- 1 elastic elastic   400 Mar 20 21:33 snap-nO1FtOkHT0eA7rz6f1RZxA.dat
+```
 Удалите индекс `test` и создайте индекс `test-2`. **Приведите в ответе** список индексов.
-
+#### Ответ: 
+```
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X DELETE "https://localhost:9200/test?pretty"
+{
+  "acknowledged" : true
+}
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X PUT "https://localhost:9200/test-2?pretty" -H 'Content-Type: application/json' -d'
+> {
+>   "settings": {
+>     "index": {
+>       "number_of_shards": 1,
+   "num>       "number_of_replicas": 0
+>     }
+>   }
+> }
+> '
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "test-2"
+}
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://localhost:9200/_cat/indices/*?v=true&s=index&pretty"
+health status index  uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   test-2 BeSbunNgScaHMVUHGr1QNg   1   0          0            0       225b           225b
+```
 [Восстановите](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html) состояние
 кластера `elasticsearch` из `snapshot`, созданного ранее. 
-
+```
+$ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X  -X GET "https://localhost:9200/_snapshot/netology_backup/*?verbose=false&pretty"
+{
+  "snapshots" : [
+    {
+      "snapshot" : "my_snapshot_2023.03.20",
+      "uuid" : "nO1FtOkHT0eA7rz6f1RZxA",
+      "repository" : "netology_backup",
+      "indices" : [
+        ".geoip_databases",
+        ".security-7",
+        "test"
+      ],
+      "data_streams" : [ ],
+      "state" : "SUCCESS"
+    }
+  ],
+  "total" : 1,
+  "remaining" : 0
+}
+```
 **Приведите в ответе** запрос к API восстановления и итоговый список индексов.
-
+#### Ответ: 
+```
+$ curl  --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X POST "https://localhost:9200/_snapshot/netology_backup/my_snapshot_2023.03.20/_restore?pretty" -H 'Content-Type: application/json' -d'
+> {
+>   "indices": "test"
+> }
+> '
+{
+  "accepted" : true
+}
+> $ curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://localhost:9200/_cat/indices/*?v=true&s=index&pretty"
+health status index  uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   test   gsKbNPZcT6OaWQhZuGaeqA   1   0          0            0       225b           225b
+green  open   test-2 BeSbunNgScaHMVUHGr1QNg   1   0          0            0       225b           225b
+```
 Подсказки:
 - возможно вам понадобится доработать `elasticsearch.yml` в части директивы `path.repo` и перезапустить `elasticsearch`
 
