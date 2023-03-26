@@ -1,0 +1,59 @@
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X PUT "https://localhost:9200/ind-3?pretty" -H 'Content-Type: application/json' -d'
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 4,  
+      "number_of_replicas": 2 
+    }
+  }
+}
+'
+
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X DELETE "https://localhost:9200/ind-1?pretty"
+
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://localhost:9200/_cat/indices/*?v=true&s=index&pretty"
+
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=50s&pretty"
+
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X GET "https://localhost:9200/_cat/shards?v=true&h=index,shard,prirep,state,node,unassigned.reason&s=state&pretty"
+
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X PUT "https://localhost:9200/_snapshot/netology_backup?pretty" -H 'Content-Type: application/json' -d'
+{
+  "type": "fs",
+  "settings": {
+    "location": "snapshots"
+  }
+}
+'
+
+curl  --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X DELETE "https://localhost:9200/_snapshot/snapshots?pretty"
+
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X PUT "https://localhost:9200/test-2?pretty" -H 'Content-Type: application/json' -d'
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,  
+      "number_of_replicas": 0 
+    }
+  }
+}
+'
+
+# PUT _snapshot/my_repository/<my_snapshot_{now/d}>
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X PUT "https://localhost:9200/_snapshot/netology_backup/%3Cmy_snapshot_%7Bnow%2Fd%7D%3E?pretty"
+
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X  -X GET "https://localhost:9200/_snapshot?pretty"
+
+curl --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X  -X GET "https://localhost:9200/_snapshot/netology_backup/*?verbose=false&pretty"
+
+
+curl  --cacert ./http_ca.crt -u elastic:5C=wDdknjM20pNi6Y4-X -X POST "https://localhost:9200/_snapshot/netology_backup/my_snapshot_2023.03.20/_restore?pretty" -H 'Content-Type: application/json' -d'
+{
+  "indices": "test"
+}
+'
+
+
+
+
+

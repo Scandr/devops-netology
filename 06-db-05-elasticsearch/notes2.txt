@@ -1,0 +1,14 @@
+/mnt/c/Users/yaitk/Documents/courses/netologia\
+
+curl --cacert ./http_ca.crt -X POST "localhost:9200/_security/user/elastic/_password?pretty" -H 'Content-Type: application/json' -d'
+{
+  "password" : "1234"
+}
+'
+
+
+5C=wDdknjM20pNi6Y4-X
+
+
+curl -X PUT "localhost:9200/ind-1?pretty"
+
