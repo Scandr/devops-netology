@@ -75,8 +75,9 @@ Terraform has compared your real infrastructure against your configuration and f
 
 В качестве результата задания предоставьте:
 1. Ответ на вопрос: при помощи какого инструмента (из разобранных на прошлом занятии) можно создать свой образ ami?
+#### Ответ: Packer
 2. Ссылку на репозиторий с исходной конфигурацией терраформа.  
-
+#### Ответ: [terraform config](https://github.com/Scandr/devops-netology/tree/main/terraform)
 <details>
 
 ```
