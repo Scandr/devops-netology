@@ -19,12 +19,6 @@ $ yc resource-manager folder add-access-binding b1gse6fjmhipl4je57pj \
 > --subject serviceAccount:ajebammc63vn28ab8tjp
 done (8s)
 $ yc iam access-key create --service-account-name terraform
-access_key:
-  id: aje0b8uu32a661ru8696
-  service_account_id: ajebammc63vn28ab8tjp
-  created_at: "2023-03-28T21:32:34.697850658Z"
-  key_id: YCAJEU9w67mNEd426kQ6o1op7
-secret: ***
 
 ```
 
