@@ -1,0 +1,9 @@
+yc iam key create \
+  --service-account-id aje4gtn3qdenqf9qn6vr \
+  --folder-name b1gse6fjmhipl4je57pj \
+  --output key.json
+
+yc storage bucket create \
+  --name 07-terraform-03-basic \
+  --default-storage-class standard \
+  --max-size 5368709 
