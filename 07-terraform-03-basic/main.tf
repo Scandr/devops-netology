@@ -19,7 +19,7 @@ terraform {
   region     = "ru-central"
   key        = "07-terraform-03-basic/terraform.tfstate"
   access_key = "YCAJEU9w67mNEd426kQ6o1op7"
-  secret_key = "YCOW4IF_kKALt_s1PbXfXlY_Nia6PczqEgQkLOsf"
+  secret_key = "***"
 
   skip_region_validation      = true
   skip_credentials_validation = true
