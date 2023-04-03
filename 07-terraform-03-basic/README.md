@@ -131,7 +131,7 @@ for this configuration.
   }
 ...
 ```
-По какой-то причине нет разницы между запуском terraform apply с данным параметром и без него:
+### По какой-то причине нет разницы между запуском terraform apply с данным параметром и без него:
 
 <details>
    <summary> с create_before_destroy = true: </summary>
