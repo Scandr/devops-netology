@@ -108,13 +108,34 @@ for this configuration.
 2. В уже созданный `aws_instance` добавьте зависимость типа инстанса от вокспейса, что бы в разных ворскспейсах 
 использовались разные `instance_type`.
 3. Добавим `count`. Для `stage` должен создаться один экземпляр `ec2`, а для `prod` два. 
+```
+...
+  name = "terraform-${terraform.workspace}-${count.index}"
+  count = "${terraform.workspace == "prod" ? 2 : 1}"
+...
+```
 4. Создайте рядом еще один `aws_instance`, но теперь определите их количество при помощи `for_each`, а не `count`.
+```
+...
+  for_each = toset( "${terraform.workspace == "prod" ? ["vm01", "vm02"] : ["vm01"]}")
+  name = "terraform-${terraform.workspace}-${each.key}"
+...
+```
+
 5. Что бы при изменении типа инстанса не возникло ситуации, когда не будет ни одного инстанса добавьте параметр
 жизненного цикла `create_before_destroy = true` в один из рессурсов `aws_instance`.
+```
+...
+  lifecycle {
+    create_before_destroy = true
+  }
+...
+```
 6. При желании поэкспериментируйте с другими параметрами и рессурсами.
 
 В виде результата работы пришлите:
 * Вывод команды `terraform workspace list`.
+### Ответ
 ```
 $ terraform workspace list
   default
@@ -122,7 +143,9 @@ $ terraform workspace list
   stage
 ```
 * Вывод команды `terraform plan` для воркспейса `prod`.  
-
+### Ответ
+[count - prod_terraform_out](https://github.com/Scandr/devops-netology/blob/main/07-terraform-03-basic/prod_terraform_out.txt)
+[for_each - prod_terraform_for_each_out](https://github.com/Scandr/devops-netology/blob/main/07-terraform-03-basic/prod_terraform_for_each_out.txt)
 ---
 
 ### Как cдавать задание

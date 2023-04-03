@@ -42,8 +42,11 @@ data "yandex_compute_image" "last_ubuntu" {
 resource "yandex_compute_instance" "vm-1" {
   for_each = toset( "${terraform.workspace == "prod" ? ["vm01", "vm02"] : ["vm01"]}")
   name = "terraform-${terraform.workspace}-${each.key}"
+#  name = "terraform-${terraform.workspace}-${count.index}"
 #  count = "${terraform.workspace == "prod" ? 2 : 1}"
-
+  lifecycle {
+    create_before_destroy = true
+  }
 
   resources {
     cores  = "${terraform.workspace == "prod" ? 2 : 1}"
