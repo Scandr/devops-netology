@@ -132,8 +132,8 @@ for this configuration.
 ...
 ```
 По какой-то причине нет разницы между запуском terraform apply с данным параметром и без него:
-<details>
-   <summary> с create_before_destroy = true: <\summary>
+
+<details><summary> с create_before_destroy = true: <\summary>
 
 ```
 yandex_compute_instance.vm-1[0]: Destroying... [id=epdsgk11kp071l1a3m18]
@@ -156,9 +156,10 @@ yandex_compute_instance.vm-1["vm02"]: Creation complete after 36s [id=epduhqv1l2
 yandex_compute_instance.vm-1["vm01"]: Still creating... [40s elapsed]
 yandex_compute_instance.vm-1["vm01"]: Creation complete after 46s [id=epdbb2jacrbgf0v013ti]
 ```
+
 <\details>
-<details>
-   <summary>без create_before_destroy = true: <\summary>
+
+<details><summary>без create_before_destroy = true: <\summary>
 
 ```
 yandex_compute_instance.vm-1["vm02"]: Destroying... [id=epdl3bqnl5ihgcf2uvpa]
@@ -186,7 +187,9 @@ yandex_compute_instance.vm-1["vm02"]: Destruction complete after 42s
 yandex_compute_instance.vm-1[0]: Creation complete after 44s [id=epdsgk11kp071l1a3m18]
 yandex_compute_instance.vm-1[1]: Creation complete after 45s [id=epdoa964572n0erskp0t]
 ```
+
 <\details>
+
 6. При желании поэкспериментируйте с другими параметрами и рессурсами.
 
 В виде результата работы пришлите:
