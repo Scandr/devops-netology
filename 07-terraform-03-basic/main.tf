@@ -40,7 +40,7 @@ data "yandex_compute_image" "last_ubuntu" {
 }
 
 resource "yandex_compute_instance" "vm-1" {
-  for_each = toset( "${terraform.workspace == "prod" ? ["vm01", "vm02"] : ["vm01"]}")
+  for_each = toset( "${terraform.workspace == "prod" ? ["1", "2"] : ["1"]}")
   name = "terraform-${terraform.workspace}-${each.key}"
 #  name = "terraform-${terraform.workspace}-${count.index}"
 #  count = "${terraform.workspace == "prod" ? 2 : 1}"
