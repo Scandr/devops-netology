@@ -143,9 +143,11 @@ $ terraform workspace list
   stage
 ```
 * Вывод команды `terraform plan` для воркспейса `prod`.  
-### Ответ</br>
+### Ответ
+
 [count - prod_terraform_out](https://github.com/Scandr/devops-netology/blob/main/07-terraform-03-basic/prod_terraform_out.txt) </br>
 [for_each - prod_terraform_for_each_out](https://github.com/Scandr/devops-netology/blob/main/07-terraform-03-basic/prod_terraform_for_each_out.txt)</br>
+
 ---
 
 ### Как cдавать задание
