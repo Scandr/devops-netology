@@ -1,0 +1,301 @@
+$ terraform plan
+data.yandex_compute_image.last_ubuntu: Reading...
+yandex_vpc_network.network-1: Refreshing state... [id=enp1j9s3lg5okq9dkqp2]
+data.yandex_compute_image.last_ubuntu: Read complete after 0s [id=fd8i3uauimpm750kd9vh]
+yandex_vpc_subnet.subnet-1: Refreshing state... [id=e2l4e084sv37qtkd8frl]
+yandex_compute_instance.vm-1["vm01"]: Refreshing state... [id=epd846e7uq4g62h74hrb]
+yandex_compute_instance.vm-1["vm02"]: Refreshing state... [id=epdl3bqnl5ihgcf2uvpa]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+  - destroy
+
+Terraform will perform the following actions:
+
+  # yandex_compute_instance.vm-1[0] will be created
+  + resource "yandex_compute_instance" "vm-1" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = <<-EOT
+                ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPVHrUBU2P/ewPX0SSKUWipEtcrIU5DE28n859KMX0xE yelena@DESKTOP-T14F2UM
+            EOT
+        }
+      + name                      = "terraform-prod-0"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8emvfmfoaordspe1jr"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options {
+          + aws_v1_http_endpoint = (known after apply)
+          + aws_v1_http_token    = (known after apply)
+          + gce_http_endpoint    = (known after apply)
+          + gce_http_token       = (known after apply)
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = "e2l4e084sv37qtkd8frl"
+        }
+
+      + placement_policy {
+          + host_affinity_rules = (known after apply)
+          + placement_group_id  = (known after apply)
+        }
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = (known after apply)
+        }
+    }
+
+  # yandex_compute_instance.vm-1[1] will be created
+  + resource "yandex_compute_instance" "vm-1" {
+      + created_at                = (known after apply)
+      + folder_id                 = (known after apply)
+      + fqdn                      = (known after apply)
+      + gpu_cluster_id            = (known after apply)
+      + hostname                  = (known after apply)
+      + id                        = (known after apply)
+      + metadata                  = {
+          + "ssh-keys" = <<-EOT
+                ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPVHrUBU2P/ewPX0SSKUWipEtcrIU5DE28n859KMX0xE yelena@DESKTOP-T14F2UM
+            EOT
+        }
+      + name                      = "terraform-prod-1"
+      + network_acceleration_type = "standard"
+      + platform_id               = "standard-v1"
+      + service_account_id        = (known after apply)
+      + status                    = (known after apply)
+      + zone                      = (known after apply)
+
+      + boot_disk {
+          + auto_delete = true
+          + device_name = (known after apply)
+          + disk_id     = (known after apply)
+          + mode        = (known after apply)
+
+          + initialize_params {
+              + block_size  = (known after apply)
+              + description = (known after apply)
+              + image_id    = "fd8emvfmfoaordspe1jr"
+              + name        = (known after apply)
+              + size        = (known after apply)
+              + snapshot_id = (known after apply)
+              + type        = "network-hdd"
+            }
+        }
+
+      + metadata_options {
+          + aws_v1_http_endpoint = (known after apply)
+          + aws_v1_http_token    = (known after apply)
+          + gce_http_endpoint    = (known after apply)
+          + gce_http_token       = (known after apply)
+        }
+
+      + network_interface {
+          + index              = (known after apply)
+          + ip_address         = (known after apply)
+          + ipv4               = true
+          + ipv6               = (known after apply)
+          + ipv6_address       = (known after apply)
+          + mac_address        = (known after apply)
+          + nat                = true
+          + nat_ip_address     = (known after apply)
+          + nat_ip_version     = (known after apply)
+          + security_group_ids = (known after apply)
+          + subnet_id          = "e2l4e084sv37qtkd8frl"
+        }
+
+      + placement_policy {
+          + host_affinity_rules = (known after apply)
+          + placement_group_id  = (known after apply)
+        }
+
+      + resources {
+          + core_fraction = 100
+          + cores         = 2
+          + memory        = 2
+        }
+
+      + scheduling_policy {
+          + preemptible = (known after apply)
+        }
+    }
+
+  # yandex_compute_instance.vm-1["vm01"] will be destroyed
+  # (because resource does not use for_each)
+  - resource "yandex_compute_instance" "vm-1" {
+      - created_at                = "2023-04-02T23:42:12Z" -> null
+      - folder_id                 = "b1gse6fjmhipl4je57pj" -> null
+      - fqdn                      = "epd846e7uq4g62h74hrb.auto.internal" -> null
+      - id                        = "epd846e7uq4g62h74hrb" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = <<-EOT
+                ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPVHrUBU2P/ewPX0SSKUWipEtcrIU5DE28n859KMX0xE yelena@DESKTOP-T14F2UM
+            EOT
+        } -> null
+      - name                      = "terraform-prod-vm01" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epd0ihbr2jfv3bbaqtdh" -> null
+          - disk_id     = "epd0ihbr2jfv3bbaqtdh" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size = 4096 -> null
+              - image_id   = "fd8emvfmfoaordspe1jr" -> null
+              - size       = 5 -> null
+              - type       = "network-hdd" -> null
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "192.168.10.7" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:82:19:c7:f6" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "51.250.100.97" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2l4e084sv37qtkd8frl" -> null
+        }
+
+      - placement_policy {
+          - host_affinity_rules = [] -> null
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+  # yandex_compute_instance.vm-1["vm02"] will be destroyed
+  # (because resource does not use for_each)
+  - resource "yandex_compute_instance" "vm-1" {
+      - created_at                = "2023-04-02T23:42:12Z" -> null
+      - folder_id                 = "b1gse6fjmhipl4je57pj" -> null
+      - fqdn                      = "epdl3bqnl5ihgcf2uvpa.auto.internal" -> null
+      - id                        = "epdl3bqnl5ihgcf2uvpa" -> null
+      - labels                    = {} -> null
+      - metadata                  = {
+          - "ssh-keys" = <<-EOT
+                ubuntu:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPVHrUBU2P/ewPX0SSKUWipEtcrIU5DE28n859KMX0xE yelena@DESKTOP-T14F2UM
+            EOT
+        } -> null
+      - name                      = "terraform-prod-vm02" -> null
+      - network_acceleration_type = "standard" -> null
+      - platform_id               = "standard-v1" -> null
+      - status                    = "running" -> null
+      - zone                      = "ru-central1-b" -> null
+
+      - boot_disk {
+          - auto_delete = true -> null
+          - device_name = "epdtg1m33l32hvbl9eie" -> null
+          - disk_id     = "epdtg1m33l32hvbl9eie" -> null
+          - mode        = "READ_WRITE" -> null
+
+          - initialize_params {
+              - block_size = 4096 -> null
+              - image_id   = "fd8emvfmfoaordspe1jr" -> null
+              - size       = 5 -> null
+              - type       = "network-hdd" -> null
+            }
+        }
+
+      - metadata_options {
+          - aws_v1_http_endpoint = 1 -> null
+          - aws_v1_http_token    = 2 -> null
+          - gce_http_endpoint    = 1 -> null
+          - gce_http_token       = 1 -> null
+        }
+
+      - network_interface {
+          - index              = 0 -> null
+          - ip_address         = "192.168.10.26" -> null
+          - ipv4               = true -> null
+          - ipv6               = false -> null
+          - mac_address        = "d0:0d:15:1a:f5:7a" -> null
+          - nat                = true -> null
+          - nat_ip_address     = "51.250.26.52" -> null
+          - nat_ip_version     = "IPV4" -> null
+          - security_group_ids = [] -> null
+          - subnet_id          = "e2l4e084sv37qtkd8frl" -> null
+        }
+
+      - placement_policy {
+          - host_affinity_rules = [] -> null
+        }
+
+      - resources {
+          - core_fraction = 100 -> null
+          - cores         = 2 -> null
+          - gpus          = 0 -> null
+          - memory        = 2 -> null
+        }
+
+      - scheduling_policy {
+          - preemptible = false -> null
+        }
+    }
+
+Plan: 2 to add, 0 to change, 2 to destroy.
