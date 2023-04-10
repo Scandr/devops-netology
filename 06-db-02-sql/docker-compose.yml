@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  postgresql:
+#    image: docker.io/bitnami/postgresql:12
+#    image: docker.io/library/postgresql:12
+    image: postgres:12
+    ports:
+      - '5432:5432'
+    volumes:
+#      - '/opt/volume/pgdata:/bitnami/postgresql'
+      - '/opt/volume/pgdata:/var/lib/postgresql/'
+      - '/opt/volume/pgbackup:/opt/pgbackup'
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'POSTGRES_PASSWORD=1234'
+#      - 'PGDATA=/bitnami/postgresql'
+    restart: always
+
+volumes:
+  postgresql_data:
+    driver: local
