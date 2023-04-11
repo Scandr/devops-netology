@@ -204,6 +204,7 @@ test_db=# SELECT COUNT(*) FROM orders;
 (используя директиву EXPLAIN).
 
 Приведите получившийся результат и объясните что значат полученные значения.
+#### Ответ
 ```
 test_db=# EXPLAIN SELECT surname FROM clients WHERE orders IS NOT NULL;
                         QUERY PLAN
