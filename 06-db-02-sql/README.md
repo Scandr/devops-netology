@@ -52,6 +52,8 @@ test_db=# \l
 ```
 - описание таблиц (describe)
 
+<details> <summary> Ответ </summary>
+
 ```
 test_db=# \dt
           List of relations
@@ -89,12 +91,19 @@ Referenced by:
 Access method: heap
 ```
 
+</details> 
+
 - SQL-запрос для выдачи списка пользователей с правами над таблицами test_db
 - список пользователей с правами над таблицами test_db
 ```
 test_db=# SELECT table_name, grantee, privilege_type
 FROM information_schema.role_table_grants
 WHERE table_name='orders' OR table_name='clients';
+```
+
+<details> <summary> Вывод команды </summary>
+
+```
  table_name |     grantee      | privilege_type
 ------------+------------------+----------------
  orders     | postgres         | INSERT
@@ -122,6 +131,7 @@ WHERE table_name='orders' OR table_name='clients';
 (22 rows)
 ```
 
+</details>
 
 ## Задача 3
 
@@ -197,6 +207,22 @@ test_db=# SELECT COUNT(*) FROM orders;
 Приведите SQL-запрос для выдачи всех пользователей, которые совершили заказ, а также вывод данного запроса.
  
 Подсказк - используйте директиву `UPDATE`.
+#### Ответ
+```
+test_db=# UPDATE clients SET orders = (SELECT id FROM orders WHERE name = 'Монитор') WHERE surname = 'Петров Петр Петрович';
+UPDATE 1
+test_db=# UPDATE clients SET orders = (SELECT id FROM orders WHERE name = 'Гитара') WHERE surname = 'Иоганн Себастьян Бах';
+UPDATE 1
+test_db=# UPDATE clients SET orders = (SELECT id FROM orders WHERE name = 'Монитор') WHERE surname = 'Петров Петр Петрович';
+UPDATE 1
+test_db=# SELECT surname FROM clients WHERE orders IS NOT NULL;
+       surname
+----------------------
+ Петров Петр Петрович
+ Иоганн Себастьян Бах
+ Иванов Иван Иванович
+(3 rows)
+```
 
 ## Задача 5
 
@@ -250,6 +276,100 @@ test_db=# EXPLAIN (FORMAT YAML) SELECT surname FROM clients WHERE orders IS NOT 
 Восстановите БД test_db в новом контейнере.
 
 Приведите список операций, который вы применяли для бэкапа данных и восстановления. 
+#### Ответ
+```
+root@9d9d63cce990:/opt/files# su postgres
+postgres@9d9d63cce990:/opt/files$ pg_dump test_db > /opt/files/test_db-bak
+$ docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED       STATUS       PORTS                                       NAMES
+9d9d63cce990   postgres:12   "docker-entrypoint.s…"   4 hours ago   Up 4 hours   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   06-db-02-sql-postgresql-1
+$ docker stop 9d9d63cce990
+9d9d63cce990
+$ docker compose -f docker-compose-task6.yml up -d
+[+] Running 2/2
+ ✔ Container 06-db-02-sql-postgresql-1  Recreated                                                                                                                                                             0.1s
+ ✔ Container new-pg                     Started
+ $ docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+a4b538c751c0   postgres:12   "docker-entrypoint.s…"   14 seconds ago   Up 13 seconds   0.0.0.0:6432->5432/tcp, :::6432->5432/tcp   new-pg
+$ docker exec -ti a4b538c751c0 /bin/bash
+root@a4b538c751c0:/#  psql -U postgres test_db < /opt/pgbackup/test_db-bak
+```
+
+<details> <summary> Вывод команды </summary>
+
+```
+SET
+SET
+SET
+SET
+SET
+ set_config
+------------
+
+(1 row)
+
+SET
+SET
+SET
+SET
+SET
+SET
+ERROR:  relation "clients" already exists
+ALTER TABLE
+ERROR:  relation "clients_id_seq" already exists
+ALTER TABLE
+ALTER SEQUENCE
+ERROR:  relation "orders" already exists
+ALTER TABLE
+ERROR:  relation "orders_id_seq" already exists
+ALTER TABLE
+ALTER SEQUENCE
+ALTER TABLE
+ALTER TABLE
+ERROR:  duplicate key value violates unique constraint "clients_pkey"
+DETAIL:  Key (id)=(4) already exists.
+CONTEXT:  COPY clients, line 1
+ERROR:  duplicate key value violates unique constraint "orders_pkey"
+DETAIL:  Key (id)=(1) already exists.
+CONTEXT:  COPY orders, line 1
+ setval
+--------
+      5
+(1 row)
+
+ setval
+--------
+      5
+(1 row)
+
+ERROR:  multiple primary keys for table "clients" are not allowed
+ERROR:  multiple primary keys for table "orders" are not allowed
+ERROR:  relation "country_idx" already exists
+ERROR:  constraint "clients_orders_fkey" for relation "clients" already exists
+GRANT
+GRANT
+root@a4b538c751c0:/#  psql -U postgres
+psql (12.14 (Debian 12.14-1.pgdg110+1))
+Type "help" for help.
+
+postgres=# \l
+                                     List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |       Access privileges
+-----------+----------+----------+------------+------------+--------------------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres                   +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres                   +
+           |          |          |            |            | postgres=CTc/postgres
+ test_db   | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/postgres                  +
+           |          |          |            |            | postgres=CTc/postgres         +
+           |          |          |            |            | "test-admin-user"=CTc/postgres
+(4 rows)
+
+```
+
+</details>
 
 ---
 
