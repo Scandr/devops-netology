@@ -11,6 +11,8 @@
 в который будут складываться данные БД и бэкапы.
 
 Приведите получившуюся команду или docker-compose манифест.
+#### Ответ
+[docker-compose.yml](https://github.com/Scandr/devops-netology/blob/main/06-db-02-sql/docker-compose.yml)
 
 ## Задача 2
 
@@ -277,6 +279,7 @@ test_db=# EXPLAIN (FORMAT YAML) SELECT surname FROM clients WHERE orders IS NOT 
 
 Приведите список операций, который вы применяли для бэкапа данных и восстановления. 
 #### Ответ
+[docker-compose-task6.yml](https://github.com/Scandr/devops-netology/blob/main/06-db-02-sql/docker-compose-task6.yml)
 ```
 root@9d9d63cce990:/opt/files# su postgres
 postgres@9d9d63cce990:/opt/files$ pg_dump test_db > /opt/files/test_db-bak
