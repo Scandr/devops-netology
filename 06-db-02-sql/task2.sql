@@ -1,4 +1,6 @@
-CREATE USER "test-admin-user" CREATEDB CREATEUSER;
+\o /opt/files/task2_output.txt
+
+CREATE USER "test-admin-user" CREATEDB;
 CREATE DATABASE test_db;
 CREATE TABLE orders (
     id serial PRIMARY KEY,
@@ -11,7 +13,11 @@ CREATE TABLE clients (
     country text,
     orders int references orders(id)
 );
-CREATE UNIQUE INDEX country_idx ON clients(country);
+CREATE INDEX country_idx ON clients(country);
 GRANT ALL PRIVILEGES ON DATABASE "test_db" TO "test-admin-user";
 CREATE USER "test-simple-user";
 GRANT SELECT, INSERT, UPDATE, DELETE ON orders, clients TO "test-simple-user";
+
+SELECT table_name, grantee, privilege_type
+FROM information_schema.role_table_grants
+WHERE table_name='orders' OR table_name='clients';

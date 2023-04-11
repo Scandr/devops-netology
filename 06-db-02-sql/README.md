@@ -152,6 +152,33 @@ WHERE table_name='orders' OR table_name='clients';
 - приведите в ответе:
     - запросы 
     - результаты их выполнения.
+```
+test_db=# INSERT INTO orders(name, price) VALUES
+Шоколад'test_db-#     ('Шоколад',10),
+test_db-#     ('Принтер',3000),
+test_db-#     ('Книга',500),
+test_db-#     ('Монитор',7000),
+test_db-#     ('Гитара',4000);
+INSERT 0 5
+test_db=# INSERT INTO clients(surname, country) VALUES
+test_db-#     ('Иванов Иван Иванович','USA'),
+test_db-#     ('Петров Петр Петрович','Canada'),
+test_db-#     ('Иоганн Себастьян Бах','Japan'),
+test_db-#     ('Ронни Джеймс Дио','Russia'),
+test_db-#     ('Ritchie Blackmore','Russia');
+INSERT 0 5
+test_db=# SELECT COUNT(*) FROM clients;
+ count
+-------
+     5
+(1 row)
+
+test_db=# SELECT COUNT(*) FROM orders;
+ count
+-------
+     5
+(1 row)
+```
 
 ## Задача 4
 
@@ -177,7 +204,40 @@ WHERE table_name='orders' OR table_name='clients';
 (используя директиву EXPLAIN).
 
 Приведите получившийся результат и объясните что значат полученные значения.
+```
+test_db=# EXPLAIN SELECT surname FROM clients WHERE orders IS NOT NULL;
+                        QUERY PLAN
+-----------------------------------------------------------
+ Seq Scan on clients  (cost=0.00..18.10 rows=806 width=32)
+   Filter: (orders IS NOT NULL)
+(2 rows)
 
+test_db=# EXPLAIN (FORMAT YAML) SELECT surname FROM clients WHERE orders IS NOT NULL;
+             QUERY PLAN
+------------------------------------
+ - Plan:                           +
+     Node Type: "Seq Scan"         +
+     Parallel Aware: false         +
+     Relation Name: "clients"      +
+     Alias: "clients"              +
+     Startup Cost: 0.00            +
+     Total Cost: 18.10             +
+     Plan Rows: 806                +
+     Plan Width: 32                +
+     Filter: "(orders IS NOT NULL)"
+(1 row)
+
+```
+Node Type: "Seq Scan" - Тип узла сканирования, в данном случае Seq Scan - простое последовательное сканирование </br>
+Parallel Aware: false - Не использовать параллельное сканирование, выставляется true, когда больше одной рабочей ноды
+Relation Name: "clients" - Целевой объект сканирования
+Alias: "clients" - алиас целевого объекта
+Startup Cost: 0.00 - сколько потребуется времени на выдачу первой строки
+Total Cost: 18.10 - сколько потребуется на выдачу всех строк
+Данные величины изменяются в последовательно прочитанных страницах - количество времени, которое потребуется на последовательное чтение 1 страницы = 1 единица -> 18.10 единиц = время последовательного прочтения 18.10 страниц
+Plan Rows: 806 - примерное количество строк
+Plan Width: 32  - размер строк в байтах
+Filter: "(orders IS NOT NULL)" - фильтр для строк
 ## Задача 6
 
 Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. Задачу 1).

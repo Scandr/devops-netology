@@ -11,6 +11,7 @@ services:
 #      - '/opt/volume/pgdata:/bitnami/postgresql'
       - '/opt/volume/pgdata:/var/lib/postgresql/'
       - '/opt/volume/pgbackup:/opt/pgbackup'
+      - '/opt/volume/files:/opt/files'
     environment:
       - 'ALLOW_EMPTY_PASSWORD=yes'
       - 'POSTGRES_PASSWORD=1234'
