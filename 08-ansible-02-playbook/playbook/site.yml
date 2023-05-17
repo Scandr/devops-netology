@@ -1,0 +1,134 @@
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  handlers:
+    - name: Start clickhouse service
+      become: true
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: restarted
+  tasks:
+    - block:
+#        - name: Get clickhouse distrib
+#          ansible.builtin.apt:
+#            deb: "https://packages.clickhouse.com/deb/pool/main/c/{{ item }}/{{ item }}_{{ clickhouse_version }}_all.deb"
+#          with_items: "{{ clickhouse_packages }}"
+#      rescue:
+#        - name: Get clickhouse distrib
+#          ansible.builtin.apt:
+#            deb: "https://packages.clickhouse.com/deb/pool/main/c/clickhouse-common-static/clickhouse-common-static_{{ clickhouse_version }}_amd64.deb"
+#      - name: Get clickhouse distrib
+#        ansible.builtin.get_url:
+#          url: "https://packages.clickhouse.com/deb/pool/main/c/{{ item }}/{{ item }}_{{ clickhouse_version }}_all.deb"
+#          dest: "./{{ item }}_{{ clickhouse_version }}_all.deb"
+#        with_items: "{{ clickhouse_packages }}"
+#      rescue:
+#        - name: Get clickhouse distrib
+#          ansible.builtin.get_url:
+#            url: "https://packages.clickhouse.com/deb/pool/main/c/clickhouse-common-static/clickhouse-common-static_{{ clickhouse_version }}_amd64.deb"
+#            dest: "./clickhouse-common-static_{{ clickhouse_version }}_amd64.deb"
+#
+#    - name: Install clickhouse packages
+#      become: true
+#      ansible.builtin.apt:
+#        deb:
+#          - '/home/yelena/devops-netology/08-ansible-02-playbook/playbook/clickhouse-common-static_{{ clickhouse_version }}_amd64.deb'
+#          - '/home/yelena/devops-netology/08-ansible-02-playbook/playbook/clickhouse-client_{{ clickhouse_version }}_all.deb'
+#          - '/home/yelena/devops-netology/08-ansible-02-playbook/playbook/clickhouse-server_{{ clickhouse_version }}_all.deb'
+
+
+        - name: Get clickhouse distrib
+          become: true
+          ansible.builtin.apt:
+            deb: "https://packages.clickhouse.com/deb/pool/main/c/clickhouse-common-static/clickhouse-common-static_{{ clickhouse_version }}_amd64.deb"
+        - name: Get clickhouse distrib
+          become: true
+          ansible.builtin.apt:
+            deb: "https://packages.clickhouse.com/deb/pool/main/c/{{ item }}/{{ item }}_{{ clickhouse_version }}_all.deb"
+          with_items: "{{ clickhouse_packages }}"
+      rescue:
+        - name: Get clickhouse distrib
+          become: true
+          ansible.builtin.apt:
+            deb: "https://packages.clickhouse.com/deb/pool/main/c/clickhouse-common-static/clickhouse-common-static_{{ clickhouse_version }}_amd64.deb"
+
+#      - name: Add clickhouse repository into sources list
+#        become: true
+#        ansible.builtin.apt_repository:
+#          repo: deb https://packages.clickhouse.com/deb stable main
+#          state: present
+#
+#      - name: install clickhouse packages
+#        become: true
+#        ansible.builtin.apt:
+#          pkg:
+#          - clickhouse-server
+#          - clickhouse-client
+#
+#      - name: Start service clickhouse-server, if not started
+#        ansible.builtin.service:
+#          name: clickhouse-server
+#          state: started
+
+      notify: Start clickhouse service
+    - name: Flush handlers
+      meta: flush_handlers
+    - name: Create database
+      ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc !=82
+      changed_when: create_db.rc == 0
+
+- name: Install Vector
+  hosts: vector
+  tasks:
+    - name: Create dir for vector installation
+      become: true
+      ansible.builtin.file:
+          path: "{{ vector_dir }}"
+          state: directory
+          owner: "yelena"
+          group: "yelena"
+          mode: '0755'
+
+    - name: delete archive dir
+      ansible.builtin.shell:
+        cmd: '[ "$(ls -A /opt/vector)" ] && rm -r /opt/vector/* || echo "Empty" '
+
+    - name: Get vector distrib
+      ansible.builtin.get_url:
+        url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+        dest: "{{ vector_dir }}/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+
+    - name: Extract archive
+      ansible.builtin.unarchive:
+        src: "{{ vector_dir }}/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+        dest: "{{ vector_dir }}"
+
+    - name: move to vector_dir
+      ansible.builtin.shell:
+        cmd: "mv /opt/vector/vector-x86_64-unknown-linux-musl/* /opt/vector/"
+
+#    - name: delete archive dir
+#      ansible.builtin.shell:
+#        cmd: "rm -r /opt/vector/vector-x86_64-unknown-linux-musl"
+    - name: Recursively remove vector archive directory
+      ansible.builtin.file:
+        path: /opt/vector/vector-x86_64-unknown-linux-musl
+        state: absent
+
+    - name: Add another bin dir to system-wide $PATH
+      become: true
+      ansible.builtin.shell:
+        cmd: 'echo "PATH=$PATH:{{ vector_dir }}" > /etc/profile.d/vector-path.sh'
+
+    - name: Add vector symlink to /usr/bin
+      become: true
+      ansible.builtin.file:
+        src: "{{ vector_dir }}/bin/vector"
+        dest: "/usr/bin/vector"
+        state: link
+
+    - name: Run vector config
+      ansible.builtin.shell:
+        cmd: "vector --config {{ vector_dir }}/config/vector.toml >/dev/null 2>&1 &"
