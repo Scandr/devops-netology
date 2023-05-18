@@ -55,3 +55,46 @@ $ ansible-playbook site_v2.yml -i inventory/prod.yml -K
 Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
 
 ---
+
+## Комментарии к работе:
+Версии приложений и ОС:
+#### ansible-lint
+```
+$ ansible-lint --version
+WARNING: PATH altered to include /usr/bin
+ansible-lint 5.4.0 using ansible 2.14.1
+```
+#### ansible
+```
+$ ansible --version
+ansible [core 2.14.1]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/yelena/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/yelena/.local/lib/python3.10/site-packages/ansible
+  ansible collection location = /home/yelena/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/yelena/.local/bin/ansible
+  python version = 3.10.6 (main, Mar 10 2023, 10:55:28) [GCC 11.3.0] (/usr/bin/python3)
+  jinja version = 3.0.3
+  libyaml = True
+```
+#### OS (1)
+```
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.2 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.2 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+```
+#### OS (2)
+```
+$ cat /proc/version
+Linux version 5.15.90.1-microsoft-standard-WSL2 (oe-user@oe-host) (x86_64-msft-linux-gcc (GCC) 9.3.0, GNU ld (GNU Binutils) 2.34.0.20200220) #1 SMP Fri Jan 27 02:56:13 UTC 2023
+```

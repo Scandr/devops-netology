@@ -25,6 +25,7 @@
             deb: "https://packages.clickhouse.com/deb/pool/main/c/clickhouse-common-static/clickhouse-common-static_{{ clickhouse_version }}_amd64.deb"
 
       notify: Start clickhouse service
+
     - name: Flush handlers
       meta: flush_handlers
     - name: Create database
@@ -43,7 +44,7 @@
 
   tasks:
     - name: Check if vector dir exists
-      stat: path="{{ vector_dir }}"
+      ansible.builtin.stat: path="{{ vector_dir }}"
       register: vector_dir_stat
 
     - name: Create dir for vector installation
@@ -67,6 +68,7 @@
       ansible.builtin.get_url:
         url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
         dest: "{{ vector_dir }}/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
+        mode: '0664'
 
     - name: Extract archive
       ansible.builtin.unarchive:
@@ -74,10 +76,10 @@
         dest: "{{ vector_dir }}"
 
     - name: Check if archive folder is empty
-      stat: path="{{ vector_dir }}/vector-x86_64-unknown-linux-musl/"
+      ansible.builtin.stat: path="{{ vector_dir }}/vector-x86_64-unknown-linux-musl/"
       register: archive_dir_stat
 
-    - name: move to vector_dir
+    - name: Move to vector_dir
       ansible.builtin.shell:
         cmd: 'mv {{ vector_dir }}/vector-x86_64-unknown-linux-musl/* /opt/vector/'
       when: archive_dir_stat
@@ -95,10 +97,12 @@
         cmd: 'echo "PATH=$PATH:{{ vector_dir }}" > /etc/profile.d/vector-path.sh'
 
     - name: Check if sym link for vector exists in /usr/bin
-      stat: path="/usr/bin/vector"
+      ansible.builtin.stat: path="/usr/bin/vector"
       register: vector_bin_stat
 
     - name: Replace sym link for vector
+      when: vector_bin_stat
+      become: true
       block:
         - name: Delete old vector symlink in /usr/bin
           ansible.builtin.file:
@@ -110,9 +114,6 @@
             src: "{{ vector_dir }}/bin/vector"
             dest: "/usr/bin/vector"
             state: link
-
-      when: vector_bin_stat
-      become: true
 
     - name: Add vector symlink to /usr/bin
       become: true
