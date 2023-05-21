@@ -61,9 +61,11 @@
 ## Комментарии
 Не получилось подключиться к clickhouse через веб-интерфейс lighthouse, при попытке сделать запрос выводится следующая ошибка:
 ![image](https://github.com/Scandr/devops-netology/blob/main/08-ansible-03-yandex/lighthouse_error.PNG)
-  
-ExecuteAuto-sizeCSV
+
+Текст ошибки:
+```
 Error: XMLHttpRequest error: got status 0, error text:
+```
 
 Прописывание в /etc/clickhouse-server/config.xml строки
 ```
