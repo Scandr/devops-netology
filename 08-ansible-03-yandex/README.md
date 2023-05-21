@@ -64,6 +64,13 @@
   
 ExecuteAuto-sizeCSV
 Error: XMLHttpRequest error: got status 0, error text:
+
+Прописывание в /etc/clickhouse-server/config.xml строки
+```
+<listen_host>::</listen_host>
+```
+не помогло (но с этой строкой не появляются всплывающие окна-ошибки с подобным описанием)
+
 ---
 
 ### Как оформить решение задания
