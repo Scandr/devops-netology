@@ -138,6 +138,11 @@
         name: nginx
         state: present
 
+    - name: Recursively remove /var/www/html
+      ansible.builtin.file:
+        path: /var/www/html
+        state: absent
+
     - name: Create symlink for NGINX to open Lighthouse
       ansible.builtin.file:
         src: "{{ lighthouse_dir }}"
