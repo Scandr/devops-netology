@@ -1,0 +1,26 @@
+{
+  "builders": [
+    {
+      "disk_type": "network-nvme",
+      "folder_id": "b1gse6fjmhipl4je57pj",
+      "image_description": "ubuntu 22 lts with basic packages",
+      "image_family": "ubuntu",
+      "image_name": "ubuntu-base",
+      "source_image_family": "ubuntu-2204-lts",
+      "ssh_username": "ubuntu",
+      "token": "***",
+      "type": "yandex",
+      "use_ipv4_nat": true,
+      "zone": "ru-central1-b"
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "sudo apt -y update",
+        "sudo apt -y install bridge-utils iptables curl net-tools tcpdump rsync telnet openssh-server"
+      ],
+      "type": "shell"
+    }
+  ]
+}
