@@ -58,6 +58,10 @@
 * создает ссылку на склонированный репозиторий для директории сайтов nginx
 * перезапускает nginx
 
+### Ответ
+Получилось разобраться, по какой-то причине не цепляет по внутренней сети, но через внешний IP работает
+![image](https://github.com/Scandr/devops-netology/blob/main/08-ansible-03-yandex/lighthouse_working.PNG)
+
 ## Комментарии
 Не получилось подключиться к clickhouse через веб-интерфейс lighthouse, при попытке сделать запрос выводится следующая ошибка:
 ![image](https://github.com/Scandr/devops-netology/blob/main/08-ansible-03-yandex/lighthouse_error.PNG)
