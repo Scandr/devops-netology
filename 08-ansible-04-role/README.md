@@ -70,6 +70,50 @@
 ## Комментарии:
 Не удалось воспользоваться предложенной ролью git@github.com:AlexeySetevoi/ansible-clickhouse.git, были следующие ошибки
 
+<summary>Ошибка</summary>
+<details>
+
+```
+│ PLAY [clickhouse] **************************************************************
+│
+│ TASK [Gathering Facts] *********************************************************
+│ ok: [clickhouse01.netology.yc]
+│
+│ TASK [clickhouse : Get clickhouse distrib] *************************************
+│ changed: [clickhouse01.netology.yc]
+│
+│ TASK [clickhouse : Get clickhouse distrib] *************************************
+│ fatal: [clickhouse01.netology.yc]: FAILED! => {}
+│
+│ MSG:
+│
+│ 'clickhouse_packages' is undefined. 'clickhouse_packages' is undefined
+│
+│ TASK [clickhouse : Get clickhouse distrib] *************************************
+│ ok: [clickhouse01.netology.yc]
+│
+│ TASK [clickhouse : Flush handlers] *********************************************
+│
+│ RUNNING HANDLER [clickhouse : Start clickhouse service] ************************
+│ fatal: [clickhouse01.netology.yc]: FAILED! => {
+│     "changed": false
+│ }
+│
+│ MSG:
+│
+│ Could not find the requested service clickhouse-server: host
+
+```
+
+</details>
+
+Похоже на то, что несмотря на команду 
+```
+ansible-galaxy install --force -r ../requirements.yml
+```
+Роль не переустановилась, в итоге была использована собственная роль:
+- [clickhouse-role](https://github.com/Scandr/clickhouse-role.git)
+
 ---
 
 ### Как оформить решение задания
