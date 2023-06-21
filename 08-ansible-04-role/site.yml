@@ -1,0 +1,19 @@
+---
+- hosts: clickhouse
+#  remote_user: root
+  become: true
+  roles:
+    - role: clickhouse
+      vars:
+        clickhouse_version: "22.3.3.44"
+#        clickhouse_packages:
+#          - clickhouse-client
+#          - clickhouse-server
+#          - clickhouse-common-static
+        clickhouse_http_port: 8123
+        clickhouse_tcp_port: 9000
+        clickhouse_interserver_http: 9009
+        clickhouse_listen_host:
+          - "::"
+    - vector
+    - lighthouse
