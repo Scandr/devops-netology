@@ -114,6 +114,8 @@ ansible-galaxy install --force -r ../requirements.yml
 Роль не переустановилась, в итоге была использована собственная роль:
 - [clickhouse-role](https://github.com/Scandr/clickhouse-role.git)
 
+Получилось исправить: проблема была в одинаковом названии локальной роли в папке ./roles и удаленной роли, устанавливаемой из гита через файл requirements.yml, - роль в папке ./roles приоритетнее. Название удаленной роли в requirements.yml было изменено на clickhouse-vendor, что решило проблему
+
 ---
 
 ### Как оформить решение задания
