@@ -1,19 +1,52 @@
 ---
-- hosts: clickhouse
+- name: Install clickhouse, vector, lighthouse
+  hosts: clickhouse
 #  remote_user: root
   become: true
-  roles:
-    - role: clickhouse
-      vars:
-        clickhouse_version: "22.3.3.44"
-#        clickhouse_packages:
-#          - clickhouse-client
-#          - clickhouse-server
-#          - clickhouse-common-static
-        clickhouse_http_port: 8123
-        clickhouse_tcp_port: 9000
-        clickhouse_interserver_http: 9009
-        clickhouse_listen_host:
-          - "::"
-    - vector
-    - lighthouse
+  vars:
+    clickhouse_version: "22.3.3.44"
+    clickhouse_http_port: 8123
+    clickhouse_tcp_port: 9000
+    clickhouse_interserver_http: 9009
+    clickhouse_listen_host:
+      - "::"
+  tasks:
+    - name: Include clickhouse role
+      include_role:
+        name: clickhouse-vendor
+
+    - name: Wait for install processes to finish
+      ansible.builtin.pause:
+        minutes: 2
+
+    - name: Include vector role
+      include_role:
+        name: vector
+
+    - name: Wait for install processes to finish
+      ansible.builtin.pause:
+        minutes: 2
+
+    - name: Destroy the lock file
+      ansible.builtin.pause:
+        minutes: 5
+
+    - name: Include lighthouse role
+      include_role:
+        name: lighthouse
+
+#  roles:
+#    - role: clickhouse-vendor
+#      vars:
+#        clickhouse_version: "22.3.3.44"
+##        clickhouse_packages:
+##          - clickhouse-client
+##          - clickhouse-server
+##          - clickhouse-common-static
+#        clickhouse_http_port: 8123
+#        clickhouse_tcp_port: 9000
+#        clickhouse_interserver_http: 9009
+#        clickhouse_listen_host:
+#          - "::"
+#    - vector
+#    - lighthouse
